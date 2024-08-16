@@ -60,12 +60,12 @@ fi
 
 # everything below here runs as _bld_helix user
 
-if [ ! which cargo ]; then
+# if [ ! which cargo ]; then
 	# download cargo
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
-	  sh -s -- -y --default-toolchain stable --profile minimal
-	export PATH=$HOME/.cargo/bin:$PATH
-fi
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+  sh -s -- -y --default-toolchain stable --profile minimal
+export PATH=$HOME/.cargo/bin:$PATH
+# fi
 
 cd $BLDDIR
 tar -Jxvf $CWD/$APP-$VERSION-source.tar.xz

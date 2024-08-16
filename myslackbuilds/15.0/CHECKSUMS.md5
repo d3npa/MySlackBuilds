@@ -15,7 +15,7 @@ c0b740098f48199631073da996ab8bd8  ./slackhax/mplus-fonts/slack-desc
 98e60dd69eb33e8eed1e19406ea0d00e  ./slackhax/alacritty/alacritty.SlackBuild
 393602a896f9aa7e3a6017cb7a1e1938  ./slackhax/helix/slack-desc
 66cf9d75a0aa30fdd8681b6928a53e5d  ./slackhax/helix/helix.info
-a51e8781aa45e2cf6239b318ba431e25  ./slackhax/helix/helix.SlackBuild
+eee6d15f19e1782047bbb1ee40a39334  ./slackhax/helix/helix.SlackBuild
 28afb6c492c84a683f6cefd3f25b7357  ./slackhax/systemd-boot-efi/slack-desc
 2e625ed83c9cc83657d0043ba892e5c1  ./slackhax/systemd-boot-efi/systemd-boot-efi.info
 e102bf5820c5eaf3767d41030edf0745  ./slackhax/systemd-boot-efi/systemd-boot-efi.SlackBuild
