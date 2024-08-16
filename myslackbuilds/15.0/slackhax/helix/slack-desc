@@ -1,0 +1,12 @@
+app: Helix
+app:
+app: A Kakoune / Neovim inspired editor, written in Rust.
+app: 
+app: Warning: conflicts with helix-bin
+app:
+app:
+app:
+app:
+app:
+app:
+

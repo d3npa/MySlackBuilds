@@ -1,0 +1,96 @@
+#!/bin/sh -e
+# kyo.ko revision date 2023/08/24
+
+# OPTIONS 
+INCLUDE_GRAMMARS=1
+INCLUDE_THEMES=1
+# --
+
+CWD=$(pwd)
+OUTPUT=${OUTPUT:-/tmp}
+TMP=${TMP:-/tmp}
+
+VERSION=${VERSION:-24.03}
+PKG_VERSION=$VERSION
+
+# how to tell tools to download right app for x86_64, riscv64, or aarch64?
+if [ -z "$ARCH" ]; then
+	case "$( uname -m )" in
+		x86_64)  ARCH=x86_64 ;;
+		arm*)    ARCH=aarch64 ;;
+		riscv64) ARCH=riscv64 ;;
+		*)       ARCH=$( uname -m ) ;;
+	esac
+fi
+
+BUILD=${BUILD:-2_k}
+
+APP=helix
+WRKDIR=$TMP/wrk-${APP}
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+if [ $USER = 'root' ]; then
+	rm -rf $WRKDIR
+	mkdir -p $BLDDIR
+	mkdir -p $PKGDIR/usr/bin
+	mkdir -p $PKGDIR/opt/helix
+	mkdir -p $PKGDIR/install
+	touch $PKGDIR/usr/bin/hx # touching so it can be removed with removepkg
+
+	echo "re-running as temporary non-root user"
+	useradd _bld_helix --home-dir $WRKDIR
+	chown -R _bld_helix $WRKDIR
+	chown _bld_helix $CWD/$APP-$VERSION-source.tar.xz # make sure i can read it
+	su _bld_helix $0 %@
+	userdel _bld_helix
+
+	cd $PKGDIR
+	chown -R root:root .
+	chmod -R u+w,go+r-w,a-s .
+	chmod +x install/doinst.sh
+	if [ -x /sbin/makepkg ]; then
+		/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz
+	else 
+		# non-Slackware distro support
+		tar zvcf $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz ./*
+	fi
+	exit 0
+fi
+
+# everything below here runs as _bld_helix user
+
+if [ ! which cargo ]; then
+	# download cargo
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+	  sh -s -- -y --default-toolchain stable --profile minimal
+	export PATH=$HOME/.cargo/bin:$PATH
+fi
+
+cd $BLDDIR
+tar -Jxvf $CWD/$APP-$VERSION-source.tar.xz
+# export CARGO_HOME=$WRKDIR/.cargo
+cargo install --path helix-term --locked --root $PKGDIR/opt/helix
+
+RUNTIME=$PKGDIR/opt/helix/bin/runtime
+mkdir -p $RUNTIME
+# cp -r $BLDDIR/runtime $RUNTIME
+# find $RUNTIME -name '.git' -exec rm -rf {} \; # looots of unneeded .git dirs
+cd $BLDDIR/runtime
+cp -r queries tutor $RUNTIME # idk what these are...
+if [ $INCLUDE_GRAMMARS = 1 ]; then
+	mkdir -p $RUNTIME/grammars
+	cp -r grammars/*.so $RUNTIME/grammars # don't copy sources/
+fi
+if [ $INCLUDE_THEMES = 1 ]; then
+	cp -r themes $RUNTIME
+fi
+
+cd $PKGDIR
+cp $CWD/slack-desc install/slack-desc
+cat <<-EOF > install/doinst.sh
+#!/bin/sh
+ln -sf /opt/helix/bin/hx /usr/bin/hx
+EOF
+
+

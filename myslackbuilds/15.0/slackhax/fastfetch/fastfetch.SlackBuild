@@ -1,0 +1,33 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-2.21.2}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=fastfetch
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+mkdir -p $PKGDIR/usr/local
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+mkdir -p $BLDDIR
+# build package here
+tar zxvf $APP-${VERSION}.tar.gz -C $BLDDIR
+cd $BLDDIR/$APP-${VERSION}
+mkdir build
+cd build
+cmake ..
+cmake --build . --target fastfetch --target flashfetch
+cmake --install . --prefix $PKGDIR/usr/local
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz

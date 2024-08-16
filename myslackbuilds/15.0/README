@@ -1,0 +1,10 @@
+i made a little repo for software i want to use on my slackware devices
+this repo is a bit unclean..sorry for that!
+
+you can use these slackbuilds manually or use them with sbopkg
+
+```
+# /etc/sbopkg/repos.d/70-slackhax.repo
+slackhax 15.0 "slackhax Repo" _k rsync pixeldreams.tokyo::pub/slackbuilds/15.0 ""
+```
+

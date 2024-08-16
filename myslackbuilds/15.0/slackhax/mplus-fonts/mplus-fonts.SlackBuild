@@ -1,0 +1,35 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-master}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=mplus-fonts
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+cat <<-EOF > $PKGDIR/install/doinst.sh
+echo "rebuilding fontconfig cache"
+fc-cache -f
+EOF
+
+mkdir -p $BLDDIR
+mkdir -p $PKGDIR/usr/share/fonts/TTF
+mkdir -p $PKGDIR/usr/share/fonts/OTF
+
+unzip $CWD/$APP-$VERSION.zip -d $BLDDIR
+cp -r $BLDDIR/MPLUS_FONTS-master/fonts/ttf/*.ttf $PKGDIR/usr/share/fonts/TTF
+cp -r $BLDDIR/MPLUS_FONTS-master/fonts/ttf/*.otf $PKGDIR/usr/share/fonts/OTF
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+chmod +x install/doinst.sh
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz

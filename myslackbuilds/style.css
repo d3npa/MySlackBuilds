@@ -1,0 +1,28 @@
+/* just a little theme to make my static pages nicer */
+
+:root {
+	--fg: #c991e1;
+	--bg: #1b182c;
+}
+
+body {
+	color: var(--fg);
+	background-color: var(--bg);
+	font-family: serif;
+}
+
+pre {
+	line-height: 1em;
+	padding-left: 2ch;
+	font-family: "mono";
+}
+
+a {
+	color: var(--fg);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--bg);
+	background-color: var(--fg);
+}

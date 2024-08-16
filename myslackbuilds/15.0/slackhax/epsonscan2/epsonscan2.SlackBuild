@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# https://download3.ebz.epson.net/dsc/f/03/00/15/17/69/0ef02802c476a6564f13cac929859c394f40326a/epsonscan2-6.7.63.0-1.src.tar.gz
+# https://download3.ebz.epson.net/dsc/f/03/00/15/47/63/6be106b1681ccc4f959bbd7cd9acadc4751c500c/epsonscan2_j.pdf
+
+CWD="$(pwd)"
+TMP="${TMP:-/tmp}"
+OUTPUT="${OUTPUT:-/tmp}"
+VERSION="${VERSION:-6.7.63.0}"
+BUILD="${BUILD:-1}"
+
+APP="epsonscan2"
+WRKDIR="$TMP/wrk-$APP"
+PKGDIR="$WRKDIR/package"
+BLDDIR="$WRKDIR/build"
+
+test -e $WRKDIR && rm -r $WRKDIR
+mkdir -p $PKGDIR
+mkdir -p $BLDDIR
+
+# extract
+tar zxf $APP-$VERSION-$BUILD.src.tar.gz -C $BLDDIR
+BLDDIR="$BLDDIR/$APP-$VERSION-$BUILD"
+cd $BLDDIR
+
+# patch cmakelists to avoid polluting /tmp
+sed -is "s%/tmp/build%$BLDDIR/cmake_build%g" CMakeLists.txt
+
+# build
+NUMJOBS="${NUMJOBS:-$(( $(nproc) / 2))}" # if unset, use half of all cores
+cmake -DEPSON_INSTALL_ROOT=$PKGDIR .
+make -j$NUMJOBS
+make install
+
+# package
+cd $PKGDIR
+chown -R root:root
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$VERSION-${BUILD}_k.tgz
+exit 0
+

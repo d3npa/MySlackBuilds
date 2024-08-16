@@ -1,0 +1,17 @@
+#!/usr/bin/env bash -e
+
+VERSION={:-1.4.2}
+BUILD_DIR={:-$TMP/build_$APP}
+SRC_DIR=$BUILD_DIR/src
+PKG_DIR=$BUILD_DIR/pkg
+
+USE_NFTABLES=1
+
+rm -r $BUILD_DIR
+mkdir -p $BUILD_DIR/{src,pkg}
+tar zxf $APP-$VERSION.tar.gz -C $SRC_DIR
+
+cd $BUILD_DIR
+make -C src waydroid install DESTDIR="$PKG_DIR" USE_NFTABLES=$USE_NFTABLES
+
+

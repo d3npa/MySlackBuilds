@@ -1,0 +1,12 @@
+app: systemd-boot-efi
+app:
+app: installs efi stub from systemd to use with dracut
+app: 
+app: 
+app:
+app:
+app:
+app:
+app:
+app:
+

@@ -1,0 +1,8 @@
+PRGNAM="telescope"
+VERSION="0.8.1"
+HOMEPAGE="https://telescope.omarpolo.com/"
+DOWNLOAD="https://github.com/omar-polo/telescope/releases/download/0.8.1/telescope-0.8.1.tar.gz"
+MD5SUM="0c445855fc28a550b8138e11f11abe0e"
+REQUIRES="libressl"
+MAINTAINER="kyo"
+EMAIL="kyo@tilde.pink"

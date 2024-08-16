@@ -1,0 +1,81 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-0.12.2}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=alacritty
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+BLDUSR=_bld_$APP
+
+if [ $USER = 'root' ]; then
+  rm -rf $WRKDIR
+  mkdir -p $PKGDIR $BLDDIR
+  echo '[*] creating temporary build user'
+  useradd --home-dir $WRKDIR $BLDUSR
+  chown -R $BLDUSR $WRKDIR
+  su $BLDUSR $0 $@
+  echo '[*] deleting temporary build user'
+  userdel $BLDUSR
+  cd $PKGDIR
+  chmod -R root:root .
+  chmod -R u+w,go+r-w,a-s .
+  chmod +x install/doinst.sh
+  /sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz
+  exit 0
+fi
+
+# everything below runs as BLDUSER
+
+# set up cargo env
+# rustup toolchain install stable --profile=minimal || exit 1
+# export PATH=$HOME/rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | \
+  sh -s -- -y --default-toolchain stable --profile minimal
+export PATH=$HOME/.cargo/bin:$PATH
+
+# build app here
+tar -zxvf $CWD/$APP-$VERSION.tar.gz -C $BLDDIR
+BLDDIR=$BLDDIR/$APP-$VERSION
+cd $BLDDIR
+cargo update
+cargo build --release || exit 1
+
+# build package
+mkdir -p $PKGDIR/opt/$APP
+mkdir -p $PKGDIR/usr/local/bin
+mkdir -p $PKGDIR/usr/local/share/man/man1
+mkdir -p $PKGDIR/usr/local/share/man/man5
+mkdir -p $PKGDIR/usr/share/pixmaps
+cp target/release/alacritty $PKGDIR/usr/local/bin
+cp -r extra $PKGDIR/opt/$APP
+
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+cat <<-EOF > ${PKGDIR}/install/doinst.sh
+# https://github.com/alacritty/alacritty/blob/v0.12.2/INSTALL.md
+
+cd /opt/alacritty
+
+# terminfo
+tic -xe alacritty,alacritty-direct extra/alacritty.info
+
+# install desktop entry
+cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+desktop-file-install extra/linux/Alacritty.desktop
+update-desktop-database
+
+# install documentation
+MANPAGES=/usr/local/share/man/man1
+gzip -c extra/alacritty.man | tee $MANPAGES/alacritty.1.gz > /dev/null
+gzip -c extra/alacritty-msg.man | tee $MANPAGES/alacritty-msg.1.gz > /dev/null
+
+EOF
+
+# done. rest runs as root in the block above

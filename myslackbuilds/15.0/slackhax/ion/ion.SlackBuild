@@ -1,0 +1,47 @@
+#!/bin/sh -e
+# kyo.ko revision date 2023/08/23
+
+CWD=$(pwd)
+OUTPUT=${OUTPUT:-/tmp}
+TMP=${TMP:-/tmp}
+
+VERSION=${VERSION:-60bfb73351f0412c95b8ba2afe75e988514470a6}
+PKG_VERSION=$VERSION
+
+if [ -z "$ARCH" ]; then
+	case "$( uname -m )" in
+		i?86) ARCH=i486 ;;
+		arm*) ARCH=arm ;;
+		*)    ARCH=$( uname -m ) ;;
+	esac
+fi
+
+BUILD=${BUILD:-1_k}
+
+APP=ion
+PKG=$TMP/package-$APP
+
+rm -rf $PKG
+mkdir -p $TMP $PKG
+rm -rf $TMP/$APP-$VERSION
+
+cd $TMP || exit 1
+
+tar -zxf $CWD/$APP-$VERSION.tar.gz || exit 1
+# patching Makefile to skip git command, as .git is excluded from archives
+sed -is 's%all: $(SRC) $(GIT_REVISION)%all: $(SRC)%g' $APP-$VERSION/Makefile
+
+cd $APP-$VERSION || exit 1
+
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+
+RUSTUP=0 make
+make install prefix=/usr DESTDIR=$PKG || exit
+
+mkdir -p $PKG/install
+cat $CWD/slack-desc > $PKG/install/slack-desc
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz
+

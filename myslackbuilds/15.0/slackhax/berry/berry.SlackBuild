@@ -1,0 +1,37 @@
+#!/bin/sh -e
+# kyo.ko revised 2023-08-28
+
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-0.1.12}
+PKG_VERSION=${VERSION}
+BUILD=${BUILD:-1_k}
+
+APP=berry
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+rm -rf $WRKDIR
+mkdir -p $BLDDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+# build package here
+tar zxvf $CWD/$APP-$VERSION.tar.gz -C $BLDDIR
+BLDDIR=$BLDDIR/$APP-$VERSION
+cd $BLDDIR
+mkdir -p $BLDDIR/out
+sed -is "s%builddir.*:=.*%builddir := $BLDDIR/out%g" Config.mk.in
+make
+
+mkdir -p $PKGDIR/usr/local/bin/
+mkdir -p $PKGDIR/usr/local/share/man/man1/
+cp $BLDDIR/out/berry $BLDDIR/out/berryc $PKGDIR/usr/local/bin/
+cp $BLDDIR/berry.1 $BLDDIR/berryc.1 $PKGDIR/usr/local/share/man/man1/
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz

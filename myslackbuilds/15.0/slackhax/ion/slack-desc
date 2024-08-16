@@ -1,0 +1,12 @@
+app: Ion Shell (from RedoxOS)
+app: 
+app: Ion is a modern system shell that features a simple, yet powerful, syntax.
+app: It is written entirely in Rust, which greatly increases the overall 
+app: quality andsecurity of the shell. It also offers a level of performance i
+app: that exceeds that of Dash, when taking advantage of Ion's features. While 
+app: it is developed alongside, and primarily for, RedoxOS, it is a fully 
+app: capable on other *nix platforms.
+app: 
+app: 
+app: 
+

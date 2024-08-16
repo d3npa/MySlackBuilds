@@ -1,0 +1,5 @@
+2024-04-13 update helix to 24.03
+2024-01-08 add slackhax/epsonscan2
+2023-12-06 deleted obsolete editors/ 
+2023-12-06 fix opt folder not being made in slackhax/alacritty
+2023-11-11 updated helix to version 23.10

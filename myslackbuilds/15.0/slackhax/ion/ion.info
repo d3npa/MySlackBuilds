@@ -1,0 +1,8 @@
+PRGNAM="ion"
+VERSION="60bfb73351f0412c95b8ba2afe75e988514470a6" # git commit hash
+HOMEPAGE="https://gitlab.redox-os.org/redox-os/ion"
+DOWNLOAD="https://gitlab.redox-os.org/redox-os/ion/-/archive/60bfb73351f0412c95b8ba2afe75e988514470a6/ion-60bfb73351f0412c95b8ba2afe75e988514470a6.tar.gz"
+MD5SUM="1475563340a5c52bb45ff9f80940920f"
+REQUIRES="rust"
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"

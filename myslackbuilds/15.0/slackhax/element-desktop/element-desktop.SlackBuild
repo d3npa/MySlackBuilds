@@ -1,0 +1,35 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-1.11.70}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=element-desktop
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+ARCH="x86_64"
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+# build package here
+mkdir -p $PKGDIR/opt $PKGDIR/usr/bin
+tar zxf $APP-${VERSION}.tar.gz -C $PKGDIR/opt
+mv $PKGDIR/opt/${APP}-${VERSION} $PKGDIR/opt/$APP
+
+cat <<-EOF > $PKGDIR/install/doinst.sh
+#!/bin/sh
+ln -s /opt/element-desktop/$APP /usr/bin/$APP
+EOF
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz
+
+

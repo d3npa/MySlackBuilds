@@ -1,0 +1,59 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-0.8.1}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=telescope
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+mkdir -p $BLDDIR
+tar zxvf $CWD/$APP-$VERSION.tar.gz -C $BLDDIR
+
+# build package here
+cd $BLDDIR/$APP-$VERSION
+
+cat <<-EOF > $PKGDIR/install/doinst.sh
+  cat <<-eof
+  # so libressl on slackware's installation seems incomplete:
+  #  the .so are installed to /usr/lib64/libressl but these are not found by
+  #  the linker so i'm adding some patches here
+  # ideally i think the libressl SlackBuild should be taking care of this..
+  eof
+
+  libressl_path='/usr/lib64/libressl'
+  test -e \$libressl_path || (
+    echo "[*] libressl not found at \$libressl_path" && \
+    exit 1
+  )
+
+  ld_conf_libressl='/etc/ld.so.conf.d/libressl.conf'
+  ld -l tls 2>/dev/null || (
+    echo "[*] adding libressl path '\$libressl_path' to '\$ld_conf_libressl'" && \
+    echo "\$libressl_path" >> \$ld_conf_libressl
+  )
+EOF
+
+# idk why it couldn't find libressl on my system
+export LDFLAGS='-L/usr/lib64/libressl'
+export CFLAGS='-I/usr/include/libressl'
+./configure --prefix="$PKGDIR/usr/local"
+make
+make install
+unset CFLAGS
+unset LDFLAGS
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+chmod +x install/doinst.sh
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz

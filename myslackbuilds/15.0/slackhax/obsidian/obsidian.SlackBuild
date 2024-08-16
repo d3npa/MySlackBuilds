@@ -1,0 +1,29 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-1.6.7}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=obsidian
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+mkdir -p $PKGDIR/opt/Obsidian
+mv Obsidian-${VERSION}.AppImage $PKGDIR/opt/Obsidian 
+chmod +x $PKGDIR/opt/Obsidian/Obsidian-${VERSION}.AppImage
+cat <<-EOF > $PKGDIR/install/doinst.sh
+ln -s /opt/Obsidian/Obsidian-${VERSION}.AppImage /usr/bin/obsidian
+EOF
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz

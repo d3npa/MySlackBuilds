@@ -1,0 +1,8 @@
+PRGNAM="waydroid"
+VERSION="1.4.2" 
+HOMEPAGE="https://waydro.id"
+DOWNLOAD=""
+MD5SUM=""
+REQUIRES="python3-libgbinder"
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"

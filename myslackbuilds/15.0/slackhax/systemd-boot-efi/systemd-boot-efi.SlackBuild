@@ -1,0 +1,31 @@
+#!/usr/bin/env bash -e
+
+CWD="$(pwd)"
+TMP="${TMP:-/tmp}"
+OUTPUT="${OUTPUT:-/tmp}"
+VERSION="${VERSION:-255.4}"
+BUILD="${BUILD:-1}"
+ARCH="x86_64"
+
+APP="systemd-boot-efi"
+WRKDIR="$TMP/wrk-$APP"
+PKGDIR="$WRKDIR/package"
+BLDDIR="$WRKDIR/build"
+
+test -e $WRKDIR && rm -r $WRKDIR
+mkdir -p $PKGDIR
+mkdir -p $BLDDIR/deb
+
+# deb archives are just txz
+DEB=$(pwd)/${APP}_${VERSION}-${BUILD}_amd64.deb
+cd $BLDDIR/deb
+ar x $DEB
+tar Jxf data.tar.xz -C $PKGDIR
+
+# package
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/${APP}-$VERSION-${ARCH}-${BUILD}_k.tgz
+exit 0
+

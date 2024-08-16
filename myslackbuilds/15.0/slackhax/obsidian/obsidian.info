@@ -1,0 +1,8 @@
+PRGNAM="obsidian-bin"
+VERSION="1.6.7"
+HOMEPAGE="https://obsidian.md/"
+DOWNLOAD="https://github.com/obsidianmd/obsidian-releases/releases/download/v$VERSION/Obsidian-${VERSION}.AppImage"
+MD5SUM="3bd14ae62e3c25c49d6c1c7dc9588fc2"
+REQUIRES=""
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"

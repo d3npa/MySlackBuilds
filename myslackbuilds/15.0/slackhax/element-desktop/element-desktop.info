@@ -1,0 +1,8 @@
+PRGNAM="element-desktop"
+VERSION="1.11.70"
+HOMEPAGE="https://element.io"
+DOWNLOAD="https://packages.element.io/desktop/install/linux/glibc-x86-64/element-desktop-1.11.70.tar.gz"
+MD5SUM="2ebde5922795db4cb07d49af5bacbbf5"
+REQUIRES=""
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"

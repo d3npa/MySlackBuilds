@@ -1,0 +1,8 @@
+PRGNAM="helix"
+VERSION="24.03"
+HOMEPAGE="https://github.com/helix-editor/helix"
+DOWNLOAD="https://github.com/helix-editor/helix/releases/download/$VERSION/helix-$VERSION-source.tar.xz"
+MD5SUM="fd6615814a7c839ac88187d13b43cc38"
+REQUIRES="curl clang"
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"
