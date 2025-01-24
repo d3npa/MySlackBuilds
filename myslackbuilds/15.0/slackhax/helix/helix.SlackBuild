@@ -10,7 +10,7 @@ CWD=$(pwd)
 OUTPUT=${OUTPUT:-/tmp}
 TMP=${TMP:-/tmp}
 
-VERSION=${VERSION:-24.03}
+VERSION=${VERSION:-25.01.1}
 PKG_VERSION=$VERSION
 
 # how to tell tools to download right app for x86_64, riscv64, or aarch64?

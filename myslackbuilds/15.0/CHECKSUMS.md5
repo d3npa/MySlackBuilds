@@ -1,6 +1,6 @@
 d41d8cd98f00b204e9800998ecf8427e  ./CHECKSUMS.md5
 f4cae168574bb4cf6c30c2aa2ba8fa1c  ./README
-4e27792d5aafd8f9813af13563803a2b  ./ChangeLog.txt
+bb86e9ee1540954e9dc49505be93f6ef  ./ChangeLog.txt
 1e6fb87a2645742b7aa7d11bfc3596bc  ./slackhax/telescope/slack-desc
 b91a272f347efdfa71ec1a22cbe73ca2  ./slackhax/telescope/telescope.info
 3083fbb62023703f6bb6a81dba691afa  ./slackhax/telescope/telescope.SlackBuild
@@ -14,8 +14,8 @@ c0b740098f48199631073da996ab8bd8  ./slackhax/mplus-fonts/slack-desc
 039d94306dc9816405adf49d6adeb831  ./slackhax/alacritty/alacritty.info
 98e60dd69eb33e8eed1e19406ea0d00e  ./slackhax/alacritty/alacritty.SlackBuild
 393602a896f9aa7e3a6017cb7a1e1938  ./slackhax/helix/slack-desc
-66cf9d75a0aa30fdd8681b6928a53e5d  ./slackhax/helix/helix.info
-eee6d15f19e1782047bbb1ee40a39334  ./slackhax/helix/helix.SlackBuild
+f5cc80efc064d46e1102595a921b6a0e  ./slackhax/helix/helix.info
+26b02c172d0c194ed73cf7cbb1f88af4  ./slackhax/helix/helix.SlackBuild
 28afb6c492c84a683f6cefd3f25b7357  ./slackhax/systemd-boot-efi/slack-desc
 2e625ed83c9cc83657d0043ba892e5c1  ./slackhax/systemd-boot-efi/systemd-boot-efi.info
 e102bf5820c5eaf3767d41030edf0745  ./slackhax/systemd-boot-efi/systemd-boot-efi.SlackBuild
