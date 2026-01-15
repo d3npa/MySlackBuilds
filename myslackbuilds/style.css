@@ -9,6 +9,7 @@ body {
 	color: var(--fg);
 	background-color: var(--bg);
 	font-family: serif;
+	font-size: 13pt;
 }
 
 pre {
