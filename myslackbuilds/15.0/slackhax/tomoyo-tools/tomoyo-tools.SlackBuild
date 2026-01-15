@@ -1,4 +1,6 @@
 #!/bin/sh -e
+set -e
+
 CWD=$(pwd)
 TMP=${TMP:-/tmp}
 OUTPUT=${OUTPUT:-/tmp}
@@ -18,8 +20,8 @@ cp $CWD/slack-desc $PKGDIR/install/slack-desc
 
 mkdir -p $BLDDIR
 # build package here
-wget https://sourceforge.net/projects/tomoyo/files/tomoyo-tools/2.6/tomoyo-tools-$VERSION.tar.gz.asc
-wget https://tomoyo.sourceforge.net/kumaneko-key
+curl -OL https://sourceforge.net/projects/tomoyo/files/tomoyo-tools/2.6/tomoyo-tools-$VERSION.tar.gz.asc
+curl -OL https://tomoyo.sourceforge.net/kumaneko-key
 gpg --import kumaneko-key
 gpg tomoyo-tools-$VERSION.tar.gz.asc # exits SlackBuild if returns 1
 echo "[*] sleeping 5 seconds..."
