@@ -22,6 +22,9 @@ e102bf5820c5eaf3767d41030edf0745  ./slackhax/systemd-boot-efi/systemd-boot-efi.S
 3da4f8cf734fe89399e8197024c5e7c1  ./slackhax/element-desktop/element-desktop.SlackBuild
 b2cc9dfbf3fc186f6880de181e3465a4  ./slackhax/element-desktop/slack-desc
 982942b81499ada49e4fe1486332876d  ./slackhax/element-desktop/element-desktop.info
+e3435cbf8230ab2fa87ec8cfc661f81a  ./slackhax/tomoyo-tools/slack-desc
+1b146cda4296b67d976630b6c62ea20b  ./slackhax/tomoyo-tools/tomoyo-tools.info
+86308b6a00e14d9e4ccd667b6e81addb  ./slackhax/tomoyo-tools/tomoyo-tools.SlackBuild
 7e9df9649f2b51f6198aee27c91dea12  ./slackhax/nerdfonts/slack-desc
 9d74bdbeb382bea3d35950d02cc02ff1  ./slackhax/nerdfonts/nerdfonts.SlackBuild
 74eecdd93259c99839c4c62bc97b7d04  ./slackhax/nerdfonts/nerdfonts.info

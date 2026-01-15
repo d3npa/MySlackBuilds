@@ -1,0 +1,9 @@
+PRGNAM="tomoyo-tools"
+VERSION="2.6.1-20250707"
+HOMEPAGE="https://tomoyo.sourceforge.net/index.html.ja"
+DOWNLOAD="https://sourceforge.net/projects/tomoyo/files/tomoyo-tools/2.6/tomoyo-tools-$VERSION.tar.gz"
+MD5SUM="99991bee8ff582165cc1fdf23ab4d5bc"
+REQUIRES=""
+MAINTAINER="kyo.ko"
+EMAIL=""
+

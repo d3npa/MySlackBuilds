@@ -1,0 +1,36 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-2.6.1-20250707}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=tomoyo-tools
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+mkdir -p $BLDDIR
+# build package here
+wget https://sourceforge.net/projects/tomoyo/files/tomoyo-tools/2.6/tomoyo-tools-$VERSION.tar.gz.asc
+wget https://tomoyo.sourceforge.net/kumaneko-key
+gpg --import kumaneko-key
+gpg tomoyo-tools-$VERSION.tar.gz.asc # exits SlackBuild if returns 1
+echo "[*] sleeping 5 seconds..."
+sleep 5
+tar -zxvf tomoyo-tools-$VERSION.tar.gz -C $BLDDIR
+cd $BLDDIR/tomoyo-tools
+make USRLIBDIR=/usr/lib64
+make USRLIBDIR=/usr/lib64 INSTALLDIR=$PKGDIR install
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz
+
