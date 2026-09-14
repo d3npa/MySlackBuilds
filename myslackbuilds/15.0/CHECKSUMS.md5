@@ -1,6 +1,6 @@
 d41d8cd98f00b204e9800998ecf8427e  ./CHECKSUMS.md5
 f4cae168574bb4cf6c30c2aa2ba8fa1c  ./README
-0949713f5e7e3b3134382b3516b79359  ./ChangeLog.txt
+55f7aa4d62f615828b90a0a043f8bd67  ./ChangeLog.txt
 1e6fb87a2645742b7aa7d11bfc3596bc  ./slackhax/telescope/slack-desc
 b91a272f347efdfa71ec1a22cbe73ca2  ./slackhax/telescope/telescope.info
 3083fbb62023703f6bb6a81dba691afa  ./slackhax/telescope/telescope.SlackBuild
@@ -26,8 +26,8 @@ b2cc9dfbf3fc186f6880de181e3465a4  ./slackhax/element-desktop/slack-desc
 1ccc2e26b4392ea454b8c0a4dafaa923  ./slackhax/iio-sensor-proxy/iio-sensor-proxy.info
 751ce601d9eb088d40d5d18a4406e1e7  ./slackhax/iio-sensor-proxy/iio-sensor-proxy.SlackBuild
 7b53cfdffa76ccd1c5d38f3fd1657bdf  ./slackhax/tabletkeyboard/slack-desc
-d0dc31e19b7559599f1c82bd76954d85  ./slackhax/tabletkeyboard/tabletkeyboard.SlackBuild
-02dfdc97fac137925a050182c57f4c60  ./slackhax/tabletkeyboard/tabletkeyboard.info
+204c4ea3315519d81763ba2b3c29a7bf  ./slackhax/tabletkeyboard/tabletkeyboard.SlackBuild
+e74f17296ca18ca7d935897c3221c6c9  ./slackhax/tabletkeyboard/tabletkeyboard.info
 e3435cbf8230ab2fa87ec8cfc661f81a  ./slackhax/tomoyo-tools/slack-desc
 1b146cda4296b67d976630b6c62ea20b  ./slackhax/tomoyo-tools/tomoyo-tools.info
 c7826d899f98e5d6ab29339d4bf7369a  ./slackhax/tomoyo-tools/tomoyo-tools.SlackBuild
