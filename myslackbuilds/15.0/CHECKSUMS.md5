@@ -1,6 +1,6 @@
 d41d8cd98f00b204e9800998ecf8427e  ./CHECKSUMS.md5
 f4cae168574bb4cf6c30c2aa2ba8fa1c  ./README
-8b4f12bddc7e414400a66939168add34  ./ChangeLog.txt
+0949713f5e7e3b3134382b3516b79359  ./ChangeLog.txt
 1e6fb87a2645742b7aa7d11bfc3596bc  ./slackhax/telescope/slack-desc
 b91a272f347efdfa71ec1a22cbe73ca2  ./slackhax/telescope/telescope.info
 3083fbb62023703f6bb6a81dba691afa  ./slackhax/telescope/telescope.SlackBuild
@@ -25,10 +25,9 @@ b2cc9dfbf3fc186f6880de181e3465a4  ./slackhax/element-desktop/slack-desc
 6e965a4d1ce770abc1961fc723896a25  ./slackhax/iio-sensor-proxy/slack-desc
 1ccc2e26b4392ea454b8c0a4dafaa923  ./slackhax/iio-sensor-proxy/iio-sensor-proxy.info
 751ce601d9eb088d40d5d18a4406e1e7  ./slackhax/iio-sensor-proxy/iio-sensor-proxy.SlackBuild
-35dfc15c904459effac60e5d7797769f  ./slackhax/iio-sensor-proxy/iio-rotate.sh
-dd59d236346046978cd0e30ce62caacb  ./slackhax/maliit-framework/maliit-framework.SlackBuild
-93f5a5e8aaa22f4e0670dbd335128410  ./slackhax/maliit-framework/slack-desc
-bf067a214853c7a2a3d1ea58a9840828  ./slackhax/maliit-framework/maliit-framework.info
+7b53cfdffa76ccd1c5d38f3fd1657bdf  ./slackhax/tabletkeyboard/slack-desc
+d0dc31e19b7559599f1c82bd76954d85  ./slackhax/tabletkeyboard/tabletkeyboard.SlackBuild
+02dfdc97fac137925a050182c57f4c60  ./slackhax/tabletkeyboard/tabletkeyboard.info
 e3435cbf8230ab2fa87ec8cfc661f81a  ./slackhax/tomoyo-tools/slack-desc
 1b146cda4296b67d976630b6c62ea20b  ./slackhax/tomoyo-tools/tomoyo-tools.info
 c7826d899f98e5d6ab29339d4bf7369a  ./slackhax/tomoyo-tools/tomoyo-tools.SlackBuild
@@ -46,10 +45,6 @@ d7e5fc1d1d9776c8192377d899263353  ./slackhax/obsidian/obsidian.SlackBuild
 884a6d2ecb8917602a833f09770f0df6  ./slackhax/ion/slack-desc
 9ea7c90a109e6a77ab714a7d7ecc7c74  ./slackhax/ion/ion.SlackBuild
 81fedb7a430a60007a190031485a1b76  ./slackhax/ion/ion.info
-ea7964e58827541ef2b8b5ab8927cb00  ./slackhax/maliit-keyboard/maliit-keyboard.SlackBuild
-46559bb9ae7f8a460d55aa84f2ab3eab  ./slackhax/maliit-keyboard/doinst.sh
-b211040e55a44768137b2cd5edd77440  ./slackhax/maliit-keyboard/slack-desc
-dd0a7d2cdccc681caa953e8b02b50a03  ./slackhax/maliit-keyboard/maliit-keyboard.info
 7d05e9b0821ed0167fa7862efd1f4ffe  ./slackhax/epsonscan2/epsonscan2.info
 8c3034c28c7ba330617471a2200bc350  ./slackhax/epsonscan2/slack-desc
 1fe34620fdf2aea6a2e29286589b395b  ./slackhax/epsonscan2/epsonscan2.SlackBuild
