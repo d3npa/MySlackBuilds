@@ -1,0 +1,8 @@
+PRGNAM="iio-sensor-proxy"
+VERSION="3.7"
+HOMEPAGE="https://gitlab.freedesktop.org/hadess/iio-sensor-proxy"
+DOWNLOAD="https://gitlab.freedesktop.org/hadess/iio-sensor-proxy/-/archive/$VERSION/iio-sensor-proxy-$VERSION.tar.gz"
+MD5SUM="8f16357abc060b692ea401c2b799579d"
+REQUIRES=""
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"

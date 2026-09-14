@@ -1,0 +1,11 @@
+iio-sensor-proxy: iio-sensor-proxy (IIO sensors to D-Bus proxy)
+iio-sensor-proxy:
+iio-sensor-proxy: Exports readings from IIO sensors (accelerometer, ambient light,
+iio-sensor-proxy: compass, proximity) on the D-Bus system bus as
+iio-sensor-proxy: net.hadess.SensorProxy, so desktop environments can auto-rotate
+iio-sensor-proxy: the screen or adjust its brightness.
+iio-sensor-proxy:
+iio-sensor-proxy: Started on demand over the D-Bus system bus; monitor-sensor is
+iio-sensor-proxy: included to watch sensor changes.
+iio-sensor-proxy:
+iio-sensor-proxy:
