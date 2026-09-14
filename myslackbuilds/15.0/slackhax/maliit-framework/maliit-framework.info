@@ -1,0 +1,8 @@
+PRGNAM="maliit-framework"
+VERSION="2.3.0"
+HOMEPAGE="https://github.com/maliit/framework"
+DOWNLOAD="https://github.com/maliit/framework/archive/refs/tags/$VERSION/$PRGNAM-$VERSION.tar.gz"
+MD5SUM="cd4af8825569685ba2eb20d0e7641e8c"
+REQUIRES=""
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"

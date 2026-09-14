@@ -1,0 +1,12 @@
+maliit-keyboard: maliit-keyboard (on-screen keyboard for Plasma touch input)
+maliit-keyboard:
+maliit-keyboard: Maliit Keyboard is the on-screen keyboard used for touch
+maliit-keyboard: input in Plasma and Plasma Mobile. It is a plugin for
+maliit-framework; enable it in System Settings > Input Devices >
+maliit-keyboard: Virtual Keyboard.
+maliit-keyboard:
+maliit-keyboard: Layouts kept by this build: en, en@dv (dvorak), ja (anthy).
+maliit-keyboard:
+maliit-keyboard: https://github.com/maliit/keyboard
+maliit-keyboard:
+maliit-keyboard:
