@@ -1,6 +1,6 @@
 d41d8cd98f00b204e9800998ecf8427e  ./CHECKSUMS.md5
 f4cae168574bb4cf6c30c2aa2ba8fa1c  ./README
-bb86e9ee1540954e9dc49505be93f6ef  ./ChangeLog.txt
+8b4f12bddc7e414400a66939168add34  ./ChangeLog.txt
 1e6fb87a2645742b7aa7d11bfc3596bc  ./slackhax/telescope/slack-desc
 b91a272f347efdfa71ec1a22cbe73ca2  ./slackhax/telescope/telescope.info
 3083fbb62023703f6bb6a81dba691afa  ./slackhax/telescope/telescope.SlackBuild
@@ -22,6 +22,9 @@ e102bf5820c5eaf3767d41030edf0745  ./slackhax/systemd-boot-efi/systemd-boot-efi.S
 3da4f8cf734fe89399e8197024c5e7c1  ./slackhax/element-desktop/element-desktop.SlackBuild
 b2cc9dfbf3fc186f6880de181e3465a4  ./slackhax/element-desktop/slack-desc
 982942b81499ada49e4fe1486332876d  ./slackhax/element-desktop/element-desktop.info
+6e965a4d1ce770abc1961fc723896a25  ./slackhax/iio-sensor-proxy/slack-desc
+1ccc2e26b4392ea454b8c0a4dafaa923  ./slackhax/iio-sensor-proxy/iio-sensor-proxy.info
+751ce601d9eb088d40d5d18a4406e1e7  ./slackhax/iio-sensor-proxy/iio-sensor-proxy.SlackBuild
 e3435cbf8230ab2fa87ec8cfc661f81a  ./slackhax/tomoyo-tools/slack-desc
 1b146cda4296b67d976630b6c62ea20b  ./slackhax/tomoyo-tools/tomoyo-tools.info
 c7826d899f98e5d6ab29339d4bf7369a  ./slackhax/tomoyo-tools/tomoyo-tools.SlackBuild
