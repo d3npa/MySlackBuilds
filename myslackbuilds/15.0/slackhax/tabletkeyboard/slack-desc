@@ -1,0 +1,11 @@
+tabletkeyboard: tabletkeyboard (on-screen keyboard for X11)
+tabletkeyboard:
+tabletkeyboard: a floating on-screen keyboard for x11. supports layouts and
+tabletkeyboard: themes are plain JSON (us and jp106 sets are bundled)
+tabletkeyboard:
+tabletkeyboard: uses qt5 and libXtst.
+tabletkeyboard:
+tabletkeyboard:
+tabletkeyboard:
+tabletkeyboard:
+tabletkeyboard:

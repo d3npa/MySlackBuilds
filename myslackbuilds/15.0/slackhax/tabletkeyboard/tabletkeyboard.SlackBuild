@@ -1,0 +1,56 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-0.1.0}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=tabletkeyboard
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+if [ -z "$ARCH" ]; then
+	case "$( uname -m )" in
+		x86_64) ARCH=x86_64 ;;
+		*)      ARCH=$( uname -m ) ;;
+	esac
+fi
+
+if [ -z "$SLKCFLAGS" ]; then
+	SLKCFLAGS="-O2 -fPIC"
+fi
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+mkdir -p $BLDDIR
+tar xf $CWD/$APP-$VERSION.tar.gz -C $BLDDIR
+cd $BLDDIR/$APP-$VERSION
+
+mkdir -p build
+cd build
+cmake \
+	-DCMAKE_CXX_FLAGS:STRING="$SLKCFLAGS" \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DBUILD_TESTING=ON \
+	..
+make -j$(nproc)
+make install DESTDIR=$PKGDIR
+cd ..
+
+find $PKGDIR -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+	| cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+mkdir -p $PKGDIR/usr/doc/$APP-$VERSION
+cp -a README.md docs $PKGDIR/usr/doc/$APP-$VERSION/
+cat $CWD/$APP.SlackBuild > $PKGDIR/usr/doc/$APP-$VERSION/$APP.SlackBuild
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz
