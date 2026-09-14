@@ -1,8 +1,0 @@
-PRGNAM="maliit-keyboard"
-VERSION="2.3.1"
-HOMEPAGE="https://github.com/maliit/keyboard"
-DOWNLOAD="https://github.com/maliit/keyboard/archive/refs/tags/$VERSION/$PRGNAM-$VERSION.tar.gz"
-MD5SUM="51c1231a0508eaefe67f1133a9744c03"
-REQUIRES="maliit-framework"
-MAINTAINER="kyo.ko"
-EMAIL="kyo@tilde.pink"
