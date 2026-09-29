@@ -1,3 +1,4 @@
+2026-09-29 add slackhax/gnome-power-manager
 2026-09-15 update slackhax/tabletkeyboard to 0.1.1
 2026-09-14 add slackhax/tabletkeyboard
 2026-09-14 add slackhax/iio-sensor-proxy

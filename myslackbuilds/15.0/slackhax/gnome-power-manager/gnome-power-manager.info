@@ -1,0 +1,8 @@
+PRGNAM="gnome-power-manager"
+VERSION="50.0"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-power-manager"
+DOWNLOAD="https://download.gnome.org/sources/gnome-power-manager/${VERSION%.*}/gnome-power-manager-$VERSION.tar.xz"
+MD5SUM="541c76d6000fced2a3cc6bcc88f1d860"
+REQUIRES=""
+MAINTAINER="kyo.ko"
+EMAIL="kyo@tilde.pink"

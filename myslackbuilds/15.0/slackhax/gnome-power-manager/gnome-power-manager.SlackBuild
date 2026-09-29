@@ -1,0 +1,79 @@
+#!/bin/sh -e
+CWD=$(pwd)
+TMP=${TMP:-/tmp}
+OUTPUT=${OUTPUT:-/tmp}
+VERSION=${VERSION:-50.0}
+PKG_VERSION=${VERSION}
+
+BUILD=${BUILD:-1_k}
+
+APP=gnome-power-manager
+WRKDIR=$TMP/wrk-$APP
+PKGDIR=$WRKDIR/package
+BLDDIR=$WRKDIR/build
+
+if [ -z "$ARCH" ]; then
+	case "$( uname -m )" in
+		x86_64) ARCH=x86_64 ;;
+		*)      ARCH=$( uname -m ) ;;
+	esac
+fi
+
+if [ -z "$SLKCFLAGS" ]; then
+	SLKCFLAGS="-O2 -fPIC"
+fi
+
+rm -rf $WRKDIR
+mkdir -p $PKGDIR/install
+cp $CWD/slack-desc $PKGDIR/install/slack-desc
+
+mkdir -p $BLDDIR
+tar xf $CWD/$APP-$VERSION.tar.xz -C $BLDDIR
+cd $BLDDIR/$APP-$VERSION
+
+# needs gtk4 and upower-glib >= 0.99.8, both in slackware-current.
+# the man page is only built when docbook2man is installed.
+CFLAGS="$SLKCFLAGS" \
+meson setup build \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+	--localstatedir=/var \
+	--mandir=/usr/man \
+	--buildtype=release
+ninja -C build
+DESTDIR=$PKGDIR ninja -C build install
+
+# slackware keeps man pages under /usr/man, gzipped
+if [ -d $PKGDIR/usr/share/man ]; then
+	mkdir -p $PKGDIR/usr/man
+	mv $PKGDIR/usr/share/man/* $PKGDIR/usr/man/
+	rmdir $PKGDIR/usr/share/man
+	find $PKGDIR/usr/man -type f -exec gzip -9 {} +
+fi
+
+mkdir -p $PKGDIR/usr/doc/$APP-$VERSION
+cp -a README.md COPYING $PKGDIR/usr/doc/$APP-$VERSION/
+cat $CWD/$APP.SlackBuild > $PKGDIR/usr/doc/$APP-$VERSION/$APP.SlackBuild
+
+# meson skips its post-install hooks when DESTDIR is set, so update the
+# schema, icon and desktop caches at install time instead
+cat <<-EOF > $PKGDIR/install/doinst.sh
+	if [ -x usr/bin/glib-compile-schemas ]; then
+	  chroot . /usr/bin/glib-compile-schemas /usr/share/glib-2.0/schemas > /dev/null 2>&1
+	fi
+	if [ -x usr/bin/update-desktop-database ]; then
+	  chroot . /usr/bin/update-desktop-database -q usr/share/applications > /dev/null 2>&1
+	fi
+	if [ -x usr/bin/gtk-update-icon-cache ]; then
+	  chroot . /usr/bin/gtk-update-icon-cache -qtf usr/share/icons/hicolor > /dev/null 2>&1
+	fi
+EOF
+chmod 755 $PKGDIR/install/doinst.sh
+
+find $PKGDIR -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
+	| cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
+
+cd $PKGDIR
+chown -R root:root .
+chmod -R u+w,go+r-w,a-s .
+/sbin/makepkg -l y -c n $OUTPUT/$APP-$PKG_VERSION-$ARCH-$BUILD.tgz

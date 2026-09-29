@@ -1,0 +1,11 @@
+gnome-power-manager: gnome-power-manager (view present and historical power usage)
+gnome-power-manager:
+gnome-power-manager: GNOME Power Statistics shows present and historical battery
+gnome-power-manager: usage and related statistics. it used to be part of GNOME
+gnome-power-manager: Power Manager; after the daemon side was merged into
+gnome-power-manager: gnome-settings-daemon what remained was this stand alone
+gnome-power-manager: viewer (binary: gnome-power-statistics).
+gnome-power-manager:
+gnome-power-manager: needs gtk4 and upower-glib, both in slackware-current.
+gnome-power-manager:
+gnome-power-manager:

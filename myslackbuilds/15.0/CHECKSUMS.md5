@@ -1,6 +1,6 @@
 d41d8cd98f00b204e9800998ecf8427e  ./CHECKSUMS.md5
 f4cae168574bb4cf6c30c2aa2ba8fa1c  ./README
-55f7aa4d62f615828b90a0a043f8bd67  ./ChangeLog.txt
+d06a7055151c1e5d2179d1e202b2a0d7  ./ChangeLog.txt
 1e6fb87a2645742b7aa7d11bfc3596bc  ./slackhax/telescope/slack-desc
 b91a272f347efdfa71ec1a22cbe73ca2  ./slackhax/telescope/telescope.info
 3083fbb62023703f6bb6a81dba691afa  ./slackhax/telescope/telescope.SlackBuild
@@ -45,6 +45,9 @@ d7e5fc1d1d9776c8192377d899263353  ./slackhax/obsidian/obsidian.SlackBuild
 884a6d2ecb8917602a833f09770f0df6  ./slackhax/ion/slack-desc
 9ea7c90a109e6a77ab714a7d7ecc7c74  ./slackhax/ion/ion.SlackBuild
 81fedb7a430a60007a190031485a1b76  ./slackhax/ion/ion.info
+e96a9f7f8db3de89cc1773f030b36619  ./slackhax/gnome-power-manager/slack-desc
+56d0ab76aa2ccc7cb35b8074809ab107  ./slackhax/gnome-power-manager/gnome-power-manager.info
+1257e5baf1bb4cda65b7a4bdd44c2b30  ./slackhax/gnome-power-manager/gnome-power-manager.SlackBuild
 7d05e9b0821ed0167fa7862efd1f4ffe  ./slackhax/epsonscan2/epsonscan2.info
 8c3034c28c7ba330617471a2200bc350  ./slackhax/epsonscan2/slack-desc
 1fe34620fdf2aea6a2e29286589b395b  ./slackhax/epsonscan2/epsonscan2.SlackBuild
